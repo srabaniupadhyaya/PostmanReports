@@ -1,0 +1,18 @@
+# This is a basic workflow to help you get started with Actions
+#Name of the GitHub Action
+name: "Newman Tests"
+#Set the action on which the workflow will trigger
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: 
+      image: postman/newman
+    steps:
+      #Checkout the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run API Tests
+        run: newman run "Restful Booker BVT.postman_collection.json" -e Production.postman_environment.json
